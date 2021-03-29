@@ -1,44 +1,34 @@
 import axios from "axios"
-import data from '../data'
+import { ACTIONS } from '../constants'
 
 export const fetch = () =>
-  dispatch => {
-    dispatch({
-      type: "FETCH",
-      payload: data
-    })
-  }
-
-/*
-// Because API is not given, the mock data is imported from JSON file
-export const fetch = () =>
-  function(dispatch) {
-    axios.get("http://netflix.com/list.json")
+  (dispatch) => {
+    axios.get("http://localhost:3000/data")
       .then(response => {
         dispatch({
-          type: "FETCH",
+          type: ACTIONS.fetch,
           payload: response.data
         })
       })
       .catch(err => {
         dispatch({
-          type: "FETCH_REJECTED",
+          type: ACTIONS.fetch_rejected,
           payload: err
         })
       })
   }
-*/
+
 
 export const add = item => {
   return {
-    type: 'ADD',
+    type: ACTIONS.add,
     payload: item,
   }
 }
 
 export const remove = item => {
   return {
-    type: 'REMOVE',
+    type: ACTIONS.remove,
     payload: item
   }
 }

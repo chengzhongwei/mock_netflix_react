@@ -10,44 +10,53 @@ const Layout = props => {
   const {
     mylist,
     recommendations,
+    error,
     add,
     remove
   } = props;
 
   useEffect(() => {
-      props.fetch()
+    props.fetch()
   },[fetch])
 
   return (
     <div className="container">
-      <h1>Hi, Chad Wei</h1>
+      <h1>My Netflix</h1>
       <h2>My List</h2>
       <div className="list-item">
-      {
-        mylist.length ? (
-          <List data = { mylist } 
-              handleClick={ remove } 
-              eventText = {"Remove"} />
+        { error ? (
+          <figure>Failed to load content</figure>
         ) : (
-          <figure>No content</figure>
-        )
-      }
+          mylist.length ? (
+            <List data = { mylist } 
+                handleClick={ remove } 
+                eventText = {"Remove"} />
+          ) : (
+            <figure>No content</figure>
+          )
+        )}
       </div>
       <h2>Recommendations</h2>
       <div className="list-item">
-      {
-        recommendations.length ? (
-          <List data = { recommendations } 
-              handleClick={ add } 
-              eventText = {"Add"} />
+      { error ? (
+        <figure>Failed to load content</figure>
         ) : (
-          <figure>No content</figure>
-        )
-      }
+          recommendations.length ? (
+            <List data = { recommendations } 
+                handleClick={ add } 
+                eventText = {"Add"} />
+          ) : (
+            <figure>No content</figure>
+          )
+        )}
       </div>
       <h2>Title Lists:</h2>
       <ul className="titleOnly">
+      { error ? (
+        <figure>Failed to load content</figure>
+        ) : (
         <List data = { mylist } titleOnly = { true } />
+      )}
       </ul>
     </div>
   )
@@ -55,7 +64,8 @@ const Layout = props => {
 
 const mapStateToProps = (state) => ({
   mylist: state.data.mylist,
-  recommendations: state.data.recommendations
+  recommendations: state.data.recommendations,
+  error: state.data.error
 })
 
 const mapDispatchToProps = dispatch =>

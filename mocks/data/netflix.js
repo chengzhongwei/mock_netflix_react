@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   'mylist' : [
     {
       'title': 'Futurama',
