@@ -2,8 +2,8 @@ import React, { useEffect } from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
-import { fetch, add, remove } from "./actions/userActions"
-import List from './components/List'
+import { fetch, add, remove } from "../actions/userActions"
+import List from '../components/List'
 
 const Layout = props => {
   // Pass down all the props from store
